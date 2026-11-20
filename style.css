@@ -1,0 +1,2499 @@
+
+/* ========================================
+   CUSTOM FONT
+======================================== */
+
+@font-face {
+  font-family: "Le Jour Script";
+  src: url("fonts/Le-jour-script/Le%20Jour%20Script%20Personal%20Use%20Only.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   RESET & BASE
+======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  scroll-snap-type: none;
+  scroll-padding-top: 0;
+}
+
+body {
+  width: 100%;
+  min-width: 320px;
+  height: auto;
+  margin: 0;
+  color: #49302c;
+  background: #f8f5ef;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.invitation {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: clip;
+}
+
+/* ========================================
+   SCROLL LOCK
+======================================== */
+
+html.no-scroll,
+body.no-scroll {
+  height: 100%;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+body.no-scroll {
+  touch-action: none;
+}
+
+/* ========================================
+   SHARED SECTION SIZING
+======================================== */
+
+.welcome-section,
+.invite-section,
+.save-date-section,
+.wedding-time-section,
+.wedding-timeline-section,
+.compliments-section,
+.family-welcome-section  {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 0;
+  max-height: 100svh;
+  margin: 0;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transform: translateY(25px) scale(0.99);
+  filter: brightness(0.94);
+  will-change: transform, opacity, filter;
+}
+
+/* ========================================
+   SHARED BACKGROUND
+======================================== */
+
+.content-sections {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background-color: #f8f5ef;
+  background-image: url("assets/bg.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  isolation: isolate;
+}
+
+.content-sections.content-active {
+  z-index: 3;
+}
+
+/* ========================================
+   ACTIVE / EXITING SECTION STATES
+======================================== */
+
+.welcome-section.section-active,
+.invite-section.section-active,
+.save-date-section.section-active,
+.wedding-time-section.section-active,
+.wedding-timeline-section.section-active,
+.compliments-section.section-active,
+.family-welcome-section.section-active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+  transform: translateY(0) scale(1);
+  filter: brightness(1);
+}
+
+.welcome-section.section-exiting,
+.invite-section.section-exiting,
+.save-date-section.section-exiting,
+.wedding-time-section.section-exiting,
+.wedding-timeline-section.section-exiting,
+.compliments-section.section-exiting,
+.family-welcome-section.section-exiting {
+  visibility: visible;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  transform: translateY(-20px) scale(0.99);
+  filter: brightness(0.94);
+  transition:
+    opacity 450ms ease,
+    transform 450ms ease,
+    filter 450ms ease;
+}
+
+.invite-section.section-entering,
+.save-date-section.section-entering,
+.wedding-time-section.section-entering,
+.wedding-timeline-section.section-entering,
+.compliments-section.section-entering,
+.family-welcome-section.section-entering  {
+  animation: sectionSceneEntrance 1100ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sectionSceneEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+    filter: brightness(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* ========================================
+   SECTION 1 — WELCOME SCREEN
+======================================== */
+
+#welcome-section {
+  z-index: 2;
+  display: block;
+  background-color: #241b19;
+  background-image: url("assets/u-r-invited.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  transform: none !important;
+  filter: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+#welcome-section.section-active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none !important;
+  filter: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+#welcome-section.section-entering {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+
+#welcome-section.section-exiting {
+  visibility: visible;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  transform: none !important;
+  filter: none !important;
+  animation: none !important;
+  transition: opacity 450ms ease !important;
+}
+
+#welcome-section:not(.section-active):not(.section-exiting) {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ========================================
+   WELCOME CONTENT
+======================================== */
+
+.welcome-content {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 16px 80px;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ========================================
+   WELCOME TEXT
+======================================== */
+
+.welcome-top {
+  margin: 0;
+  color: #fff8f3;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0;
+  filter: blur(6px);
+  transform: translate3d(0, 14px, 0) scale(0.96);
+  transition:
+    opacity 0.35s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.35s ease;
+  will-change: opacity, transform, filter;
+}
+
+.welcome-script {
+  margin: 2px 0 0;
+  color: #e7ae31;
+  font-family: "Le Jour Script", cursive;
+  font-size: 68px;
+  font-weight: normal;
+  line-height: 1.2;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translate3d(0, 20px, 0) scale(0.88);
+  transition:
+    opacity 0.55s ease 0.1s,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+    filter 0.55s ease 0.1s;
+  will-change: opacity, transform, filter;
+}
+
+.welcome-hashtag {
+  position: absolute;
+  right: 12px;
+  bottom: 35px;
+  left: 12px;
+  margin: 0;
+  color: #e7ae31;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  opacity: 0;
+  filter: blur(5px);
+  transform: translate3d(0, 12px, 0);
+  transition:
+    opacity 0.7s ease 0.2s,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s,
+    filter 0.7s ease 0.2s;
+  will-change: opacity, transform, filter;
+}
+
+.welcome-section.is-revealed .welcome-top,
+.welcome-section.is-revealed .welcome-script,
+.welcome-section.is-revealed .welcome-hashtag {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.welcome-section.is-revealed .welcome-top,
+.welcome-section.is-revealed .welcome-script {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.welcome-section.is-revealed .welcome-hashtag {
+  transform: translate3d(0, 0, 0);
+}
+
+/* ========================================
+   SECTION 2 — INVITATION
+======================================== */
+
+.invite-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* ========================================
+   INVITATION CARD
+======================================== */
+
+.invite-card {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  min-height: 0;
+  max-height: 95%;
+  padding: 15px 10px;
+  text-align: center;
+  isolation: isolate;
+  overflow: hidden;
+  text-shadow: 0 1px 12px rgb(255 250 239 / 48%);
+}
+
+.invite-card::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background-image: url("assets/stamp1.png");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  filter: blur(3px);
+  transform: translate3d(0, 22px, 0) scale(0.985);
+  transition:
+    opacity 1.5s ease,
+    transform 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.5s ease;
+  will-change: opacity, transform, filter;
+}
+
+.invite-card.is-card-visible::before {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* ========================================
+   INVITATION TEXT
+======================================== */
+
+.card-text {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 8px ;
+  margin-top: 20px;
+}
+
+.invitation-heading {
+  margin: 5px 0 ;
+  color: #634834;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 16px;
+  font-weight: bolder;
+  letter-spacing: 1.5px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   DECORATIVE DIVIDER
+======================================== */
+
+.fine-rule {
+  display: flex;
+  width: 100%;
+  max-width: 190px;
+  margin: 0 auto 15px;
+  align-items: center;
+  gap: 10px;
+  color: #b08c5c;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 22px;
+}
+
+.fine-rule::before,
+.fine-rule::after {
+  height: 1px;
+  flex: 1;
+  content: "";
+  background: rgb(176 140 92 / 65%);
+}
+
+/* ========================================
+   BRIDE & GROOM
+======================================== */
+
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.person h3 {
+  margin: 0;
+  color: #9c3039;
+  font-family: "Tangerine", cursive;
+  font-size: 65px;
+  font-weight: 700;
+  line-height: 0.95;
+}
+
+.person p {
+ max-width: 100%;
+    margin: 5px 0 0;
+    color: #49302c;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 13px;
+    font-weight: bolder;
+    letter-spacing: 0.25px;
+
+}
+
+/* ========================================
+   AMPERSAND
+======================================== */
+
+.ampersand {
+  display: block;
+  margin: 13px 0;
+  color: #b08c5c;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+/* ========================================
+   INVITATION SCROLL REVEAL
+======================================== */
+
+.invite-section .zoom-in,
+.invite-section .person h3,
+.invite-section .person p {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translate3d(0, 16px, 0) scale(0.97);
+  transform-origin: center center;
+  transition:
+    opacity 1.1s ease,
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.1s ease;
+  will-change: opacity, transform, filter;
+}
+
+.invite-section .zoom-in.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.invite-section .person.is-visible h3,
+.invite-section .person.is-visible p {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.invite-section .person.is-visible p {
+  transition-delay: 0.35s;
+}
+
+/* ========================================
+   DOORWAY OVERLAY
+======================================== */
+
+.doorway {
+  position: fixed;
+  z-index: 5;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 1200px;
+  isolation: isolate;
+}
+
+.door {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transition:
+    transform 4.8s cubic-bezier(0.65, 0, 0.35, 1),
+    filter 1.2s ease;
+}
+
+.door-left {
+  left: 0;
+  right: auto;
+  transform-origin: left center;
+}
+
+.door-right {
+  right: 0;
+  left: auto;
+  transform: translate3d(0, 0, 0);
+  transform-origin: right center;
+  filter: drop-shadow(-5px 0 8px rgb(47 13 16 / 22%));
+  transition:
+    transform 4.8s cubic-bezier(0.65, 0, 0.35, 1),
+    filter 1.2s ease;
+  transition-delay: 0.08s;
+}
+
+.doorway::before {
+  position: absolute;
+  top: 1%;
+  left: calc(50% - 2px);
+  z-index: 2;
+  width: 4px;
+  height: 98%;
+  content: "";
+  background: linear-gradient(
+    180deg,
+    transparent,
+    #d9b275 8%,
+    #8a3430 48%,
+    #dfb776 92%,
+    transparent
+  );
+  box-shadow: 0 0 7px rgb(69 22 19 / 34%);
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 4.8s cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 0.6s ease 0.7s;
+}
+
+/* ========================================
+   WAX SEAL BUTTON
+======================================== */
+
+.seal-button {
+  position: fixed;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 110px;
+  height: 110px;
+  padding: 0;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+  transform: translate3d(-50%, -50%, 0);
+  transition:
+    opacity 0.8s ease,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: visible;
+}
+
+.seal-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 3px rgb(68 33 17 / 42%))
+    drop-shadow(0 0 8px rgb(184 126 48 / 25%))
+    drop-shadow(0 5px 8px rgb(44 19 13 / 30%));
+  pointer-events: none;
+}
+
+.seal-button:focus-visible {
+  outline: 2px solid #c59851;
+  outline-offset: 5px;
+}
+
+.seal-button:disabled {
+  cursor: default;
+}
+
+.seal-button::before {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: 145px;
+  height: 145px;
+  content: "";
+  border: 1px solid rgb(231 174 49 / 75%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: sealPulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+.seal-button::after {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  content: "TAP TO OPEN";
+  padding: 8px 17px;
+  color: #fff8f0;
+  background: rgb(42 27 23 / 78%);
+  border: 1px solid rgb(231 174 49 / 65%);
+  border-radius: 30px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: tapText 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sealPulse {
+  0% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(0.88);
+  }
+
+  70%, 100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.18);
+  }
+}
+
+@keyframes tapText {
+  0%, 100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.invitation.is-open .door-left {
+  transform: translate3d(-105%, 0, 0) rotateY(12deg);
+  filter: brightness(0.92);
+}
+
+.invitation.is-open .door-right {
+  transform: translate3d(105%, 0, 0) rotateY(-12deg);
+  filter: brightness(0.92);
+}
+
+.invitation.is-open .doorway::before {
+  transform: translate3d(110vw, 0, 0);
+  opacity: 0;
+}
+
+.invitation.is-open .seal-button {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, 0) scale(0.55) rotate(-18deg);
+}
+
+.invitation.is-open .seal-button::before,
+.invitation.is-open .seal-button::after {
+  opacity: 0;
+  animation: none;
+}
+
+/* ========================================
+   SECTION 3 — SAVE THE DATE
+======================================== */
+
+.save-date-section {
+  padding: 0;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.save-date-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.save-date-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ========================================
+   MAPPED CONTENT AREA
+======================================== */
+
+.save-date-content {
+  position: absolute;
+  left: 16.3%;
+  top: 40%;
+  display: flex;
+  width: 67.4%;
+  height: 44%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 8px;
+  overflow: hidden;
+  text-align: center;
+  color: #49302c;
+}
+
+/* ========================================
+   SAVE THE DATE INTRO
+======================================== */
+
+.save-date-intro {
+  margin: 0;
+  color: #634834;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  line-height: 1.4;
+}
+
+/* ========================================
+   SAVE THE DATE HEADING
+======================================== */
+
+.save-date-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  line-height: 1.05;
+}
+
+.save-word {
+  color: #634834;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.date-word {
+  color: #9c3039;
+  font-family: "Le Jour Script", cursive;
+  font-size: 58px;
+  font-weight: normal;
+  line-height: 1.15;
+}
+
+.save-date-month {
+  margin: 0 0 5px;
+  color: #634834;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   CALENDAR
+======================================== */
+
+.save-date-calendar {
+  width: 100%;
+  max-width: 330px;
+  margin: 0 auto;
+  font-family: "DM Sans", sans-serif;
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  width: 100%;
+  text-align: center;
+}
+
+.calendar-weekdays {
+  margin-bottom: 5px;
+  color: #9c3039;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.calendar-weekdays span {
+  padding: 4px 0;
+}
+
+.calendar-day {
+  position: relative;
+  display: flex;
+    min-width: 0;
+  aspect-ratio: 1 / 0.85;
+  align-items: center;
+  justify-content: center;
+  color: #49302c;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.calendar-empty {
+  visibility: hidden;
+}
+
+.calendar-day.date-highlight {
+  position: relative;
+  isolation: isolate;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.calendar-day.date-highlight::before {
+  content: none;
+}
+
+.calendar-heart {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  max-width: 36px;
+  max-height: 36px;
+  object-fit: contain;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.85);
+  pointer-events: none;
+  transition:
+    opacity 0.7s ease,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.calendar-date-number {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+}
+
+/* ========================================
+   CINEMATIC SAVE THE DATE REVEAL
+   Resets and replays on every visit.
+======================================== */
+
+.save-date-section .cinematic-item {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translate3d(0, 18px, 0) scale(0.97);
+  transform-origin: center center;
+  transition:
+    opacity 1.1s ease,
+    filter 1.1s ease,
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+}
+
+.save-date-section .cinematic-item.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* ========================================
+   CALENDAR HEART REVEAL
+======================================== */
+
+.save-date-section .calendar-heart {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.85);
+  transition:
+    opacity 0.7s ease,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.save-date-section .calendar-heart.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ========================================
+   SHORT VIEWPORTS
+======================================== */
+
+@media (max-height: 650px) {
+  .welcome-content {
+    padding-top: 35px;
+    padding-bottom: 55px;
+  }
+
+  .welcome-script {
+    font-size: 58px;
+  }
+
+  .welcome-hashtag {
+    bottom: 18px;
+  }
+
+  .invite-card {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .card-text {
+    padding-top: 20px;
+    padding-bottom: 25px;
+  }
+
+  .person h3 {
+    font-size: 58px;
+  }
+
+  .person p {
+    margin-top: 6px;
+    font-size: 11px;
+  }
+
+  .ampersand {
+    margin: 9px 0;
+  }
+
+  .save-date-content {
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .save-date-intro {
+    font-size: 12px;
+  }
+
+  .date-word {
+    font-size: 46px;
+  }
+
+  .save-date-month {
+    font-size: 15px;
+  }
+
+  .calendar-day {
+    aspect-ratio: 1 / 0.7;
+  }
+}
+
+/* ========================================
+   VERY SMALL MOBILE SCREENS
+======================================== */
+
+@media (max-width: 380px) {
+  .welcome-content {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .welcome-top {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .welcome-script {
+    font-size: 56px;
+  }
+
+  .welcome-hashtag {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+  }
+
+  .seal-button {
+    width: 76px;
+    height: 76px;
+  }
+
+  .invitation-heading {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .fine-rule {
+    max-width: 170px;
+  }
+
+  .person h3 {
+    font-size: 56px;
+  }
+
+  .person p {
+    font-size: 11px;
+  }
+
+  .card-text {
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .save-date-content {
+    gap: 3px;
+    padding: 3px 2px;
+  }
+
+  .save-date-intro {
+    font-size: 9px;
+  }
+
+  .save-word {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .date-word {
+    font-size: 31px;
+  }
+
+  .save-date-month {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .calendar-weekdays {
+    font-size: 8px;
+  }
+
+  .calendar-weekdays span {
+    padding: 2px 0;
+  }
+
+  .calendar-day {
+    font-size: 9px;
+  }
+
+  .calendar-heart {
+    max-width: 23px;
+    max-height: 23px;
+  }
+}
+
+/* ========================================
+   LARGER SCREENS
+======================================== */
+
+@media (min-width: 601px) {
+  .welcome-script {
+    font-size: 80px;
+  }
+
+  .welcome-top {
+    font-size: 18px;
+  }
+
+  .welcome-hashtag {
+    font-size: 12px;
+    bottom: 25px;
+  }
+
+  .seal-button {
+    width: 100px;
+    height: 100px;
+  }
+
+  .card-text {
+    padding: 35px 10px 30px;
+  }
+
+  .invitation-heading {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .fine-rule {
+    max-width: 230px;
+  }
+
+  .person h3 {
+    font-size: 75px;
+  }
+
+  .person p {
+    font-size: 14px;
+  }
+
+  .ampersand {
+    margin: 16px 0;
+    font-size: 24px;
+  }
+}
+
+/* ========================================
+   REDUCED MOTION ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+
+  .welcome-top,
+  .welcome-script,
+  .welcome-hashtag {
+    transition: none !important;
+  }
+
+  .welcome-section.is-revealed .welcome-top,
+  .welcome-section.is-revealed .welcome-script,
+  .welcome-section.is-revealed .welcome-hashtag {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  .door,
+  .doorway::before,
+  .seal-button,
+  .invite-card::before,
+  .invite-section .zoom-in,
+  .invite-section .person h3,
+  .invite-section .person p,
+  .save-date-section .cinematic-item,
+  .wedding-time-section .cinematic-item,
+  .wedding-timeline-section .cinematic-item,
+  .calendar-heart {
+    transition-duration: 0.01ms !important;
+  }
+
+  .invite-section .zoom-in,
+  .invite-section .person h3,
+  .invite-section .person p,
+  .save-date-section .cinematic-item,
+  .wedding-time-section .cinematic-item,
+  .wedding-timeline-section .cinematic-item {
+    filter: none;
+  }
+
+  .invite-section.section-entering,
+  .save-date-section.section-entering,
+  .wedding-time-section.section-entering,
+  .wedding-timeline-section.section-entering {
+    animation: none !important;
+  }
+
+  .welcome-section.section-exiting,
+  .invite-section.section-exiting,
+  .save-date-section.section-exiting,
+  .wedding-time-section.section-exiting,
+  .wedding-timeline-section.section-exiting {
+    transition: none !important;
+  }
+}
+
+/* ========================================
+   FIXED NEXT SECTION ARROW
+======================================== */
+
+.next-section-button {
+  position: fixed;
+  z-index: 10;
+  right: auto;
+  left: 50%;
+  bottom: 15px;
+  transform: translateX(-50%);
+  display: block;
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.next-section-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 2px #fff9e9)
+    drop-shadow(0 0 5px rgb(255 221 153 / 65%));
+}
+
+.next-section-button.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  animation: arrowBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}
+
+.ganesha{
+   display: block;
+  width: 60px;
+  height: auto;
+  margin: 0 auto;
+}
+/* ========================================
+   SECTION 4 — WEDDING VENUE & TIME
+======================================== */
+
+.wedding-time-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    padding: 25px 15px;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Artwork */
+
+.wedding-time-art {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  margin: auto;
+}
+
+.wedding-time-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Shared mapped content */
+
+.wedding-venue-content,
+.wedding-time-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   VENUE — POLYGON AREA
+   Coordinates: 263,547 to 830,893
+======================================== */
+
+.wedding-venue-content {
+  overflow: visible;
+}
+
+.wedding-venue-content-title{
+
+
+  color: #e7ae31;
+  font-family: "Le Jour Script", cursive;
+  font-size: 50px;
+      margin: 70px 0 -15px;
+      padding-top: 10px;
+
+
+}
+
+.wedding-venue-text {
+  margin: 0;
+  width: 100%;
+
+  text-align: center;
+  color: #fff;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+.wedding-venue-text span {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+/* ========================================
+   TIME — RECTANGLE AREA
+   Coordinates: 353,1014 to 756,1237
+======================================== */
+
+.wedding-time-content {
+  overflow: visible;
+  margin-top: -13px;
+
+}
+
+.wedding-time-content-title{
+
+  color: #76513a;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.wedding-time-text {
+  position: relative;
+  margin: 0;
+  color: #9c3039;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  line-height: 1.3;
+  text-shadow: 0 2px 12px rgb(156 48 57 / 10%);
+}
+
+/* .wedding-time-content::after {
+  content: "✦  ─────  ✦";
+  display: block;
+  margin-top: 5px;
+  color: #b08c5c;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+} */
+
+/* ========================================
+   CINEMATIC REVEAL
+======================================== */
+
+.wedding-time-section .cinematic-item {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(18px) scale(0.92);
+
+  transition:
+    opacity 1.4s ease,
+    filter 1.4s ease,
+    transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  will-change: opacity, filter, transform;
+}
+
+.wedding-time-section .cinematic-item.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0) scale(1);
+}
+
+/* ========================================
+   MOBILE RESPONSIVE
+======================================== */
+
+@media (max-width: 380px) {
+
+  .wedding-venue-content {
+    padding: 4px 6px;
+  }
+
+  .wedding-venue-content::before {
+    margin-bottom: 4px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+
+  .wedding-venue-text {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+  .wedding-venue-text span {
+    font-size: 20px;
+  }
+
+  .wedding-time-content {
+    padding: 4px;
+  }
+
+  .wedding-time-content::before {
+    margin-bottom: 4px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+
+  .wedding-time-text {
+    font-size: 21px;
+    letter-spacing: 2px;
+  }
+
+  .wedding-time-content::after {
+    margin-top: 3px;
+    font-size: 10px;
+  }
+
+}
+
+@media (min-width: 601px) {
+
+  .wedding-venue-content::before {
+    font-size: 15px;
+  }
+
+  .wedding-venue-text {
+    font-size: 30px;
+  }
+
+  .wedding-time-content::before {
+    font-size: 15px;
+  }
+
+  .wedding-time-text {
+    font-size: 36px;
+  }
+
+}
+
+/* ========================================
+   SECTION 5 — WEDDING TIMELINE
+======================================== */
+
+.wedding-timeline-section {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+
+  min-height: 0;
+  max-height: 100svh;
+
+  margin: 0;
+  padding: 28px 0;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* ========================================
+   TIMELINE BACKGROUND IMAGE
+======================================== */
+
+.timeline-frame {
+  position: relative;
+
+  width: 80%;
+  max-width: 520px;
+
+  min-height: calc(100% - 56px);
+
+  margin: 0 auto;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  border: none;
+
+  background-color: transparent;
+
+  background-image: url("assets/timeline.png");
+  background-size: 100% 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+/* ========================================
+   INNER CONTENT
+======================================== */
+
+.timeline-inner {
+  position: relative;
+
+  min-height: 100%;
+
+  padding: 35px 18px 35px;
+
+  box-sizing: border-box;
+
+  border: none;
+  background: transparent;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.timeline-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.timeline-main-title {
+  margin: 0;
+
+  color: #fff;
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.timeline-script-title {
+  margin: -3px 0 0;
+
+  color: #e7ae31;
+
+  font-family: "Le Jour Script", cursive;
+  font-size: 65px;
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.timeline-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  max-width: 170px;
+  margin: 12px auto 0;
+
+  color: #b99b62;
+}
+
+.timeline-divider::before,
+.timeline-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #c6ad7c;
+}
+
+/* ========================================
+   TIMELINE STRUCTURE
+======================================== */
+
+.wedding-timeline {
+  position: relative;
+
+  width: 100%;
+  max-width: 390px;
+
+  margin: 0 auto;
+}
+
+/* Central vertical line */
+
+.wedding-timeline::before {
+  content: "";
+
+  position: absolute;
+  top: 10px;
+  bottom: 25px;
+  left: 50%;
+
+  width: 1px;
+
+  background: #b08c5c;
+  transform: translateX(-50%);
+}
+
+/* ========================================
+   INDIVIDUAL EVENTS
+======================================== */
+
+.timeline-event {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 30px 1fr;
+  align-items: center;
+
+  min-height: 145px;
+  padding-bottom: 20px;
+}
+
+/* Alternate event content */
+
+.timeline-event:nth-child(odd) .timeline-event-content {
+  grid-column: 1;
+  grid-row: 1;
+
+  text-align: right;
+  padding-right: 12px;
+}
+
+.timeline-event:nth-child(even) .timeline-event-content {
+  grid-column: 3;
+  grid-row: 1;
+
+  text-align: left;
+  padding-left: 12px;
+}
+
+/* ========================================
+   HEART MARKER
+======================================== */
+
+.timeline-marker::before {
+  content: "\f004";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+.timeline-marker {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  grid-row: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+
+  color: #d58f23;
+  font-size: 18px;
+
+  background: transparent;
+  border: none;
+}
+/* ========================================
+   EVENT DETAILS
+======================================== */
+
+.timeline-event-content {
+  min-width: 0;
+}
+
+.timeline-event-content h3 {
+  margin: 0 0 5px;
+
+  color: #e7ae31;
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.timeline-date {
+  margin: 0 0 4px;
+
+  color: #fff;
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.timeline-time {
+  margin: 0 0 4px;
+
+  color: #fff1db;
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+}
+
+.timeline-venue {
+  margin: 0;
+
+  color: #fff1db;
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.timeline-footer {
+  margin-top: 25px;
+  padding-bottom: 10px;
+
+  text-align: center;
+  color: #b99b62;
+}
+
+/* ========================================
+   CINEMATIC REVEAL
+======================================== */
+
+/* Initially hidden */
+
+.wedding-timeline-section .cinematic-item {
+  opacity: 0;
+
+  filter: blur(7px);
+
+  transform: translate3d(0, 30px, 0) scale(0.97);
+
+  transition:
+    opacity 1s ease,
+    filter 1s ease,
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  will-change: opacity, filter, transform;
+}
+
+/* Visible state */
+
+.wedding-timeline-section .cinematic-item.is-visible {
+  opacity: 1;
+
+  filter: blur(0);
+
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* ========================================
+   STAGGERED ANIMATION DELAYS
+======================================== */
+
+/* Heading */
+
+.timeline-header {
+  transition-delay: 0ms;
+}
+
+/* Engagement */
+
+.wedding-timeline .timeline-event:nth-child(1) {
+  transition-delay: 0ms;
+}
+
+/* Sangeet */
+
+.wedding-timeline .timeline-event:nth-child(2) {
+  transition-delay: 350ms;
+}
+
+/* Haldi */
+
+.wedding-timeline .timeline-event:nth-child(3) {
+  transition-delay: 700ms;
+}
+
+/* Wedding */
+
+.wedding-timeline .timeline-event:nth-child(4) {
+  transition-delay: 0ms;
+}
+
+/* Reception */
+
+.wedding-timeline .timeline-event:nth-child(5) {
+  transition-delay: 350ms;
+}
+
+/* Footer */
+
+.timeline-footer {
+  transition-delay: 200ms;
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 380px) {
+
+  .wedding-timeline-section {
+    padding: 22px 0;
+  }
+
+  .timeline-frame {
+    width: 80%;
+    padding: 0;
+
+    min-height: calc(100% - 44px);
+  }
+
+  .timeline-inner {
+    padding: 30px 8px 30px;
+  }
+
+  .timeline-main-title {
+    font-size: 27px;
+  }
+
+  .timeline-script-title {
+    font-size: 52px;
+  }
+
+  .timeline-event {
+    grid-template-columns: 1fr 25px 1fr;
+    min-height: 135px;
+  }
+
+  .timeline-marker {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+  }
+
+  .timeline-event-content h3 {
+    font-size: 17px;
+  }
+
+  .timeline-date {
+    font-size: 14px;
+  }
+
+  .timeline-time,
+  .timeline-venue {
+    font-size: 12px;
+  }
+}
+
+/* ========================================
+   TABLETS AND DESKTOP
+======================================== */
+
+@media (min-width: 601px) {
+
+  .wedding-timeline-section {
+    padding: 35px 0;
+  }
+
+  .timeline-frame {
+    width: 80%;
+    max-width: 520px;
+
+    min-height: calc(100% - 70px);
+  }
+
+  .timeline-inner {
+    padding: 45px 25px 40px;
+  }
+
+  .timeline-event {
+    min-height: 165px;
+  }
+
+  .timeline-event-content h3 {
+    font-size: 25px;
+  }
+}
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .wedding-timeline-section .cinematic-item {
+    transition: none !important;
+    filter: none;
+    transform: none;
+  }
+}
+
+/* ========================================
+   BACKGROUND IMAGE LAYERS
+======================================== */
+
+/* Shared background for Sections 2–5 */
+
+#content-sections,
+.content-sections {
+  background-color: #f8f5ef;
+  background-image: url("assets/bg.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Timeline section remains transparent */
+
+#wedding-timeline-section {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Timeline artwork */
+
+#wedding-timeline-section .timeline-frame {
+  width: 80%;
+  max-width: 520px;
+
+  min-height: calc(100% - 56px);
+
+  margin-left: auto;
+  margin-right: auto;
+
+  background-color: transparent;
+  background-image: url("assets/timeline.png");
+  background-position: center top;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Inner content */
+
+#wedding-timeline-section .timeline-inner {
+  background: transparent !important;
+  border: none;
+}
+/* ========================================
+   MOBILE TIMELINE SCROLL FIX
+======================================== */
+
+.wedding-timeline-section {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+
+  scroll-behavior: smooth;
+
+  scrollbar-width: none;
+}
+
+.wedding-timeline-section::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline-frame {
+  min-height: 100%;
+  height: auto;
+}
+/* ========================================
+   TIMELINE EVENT ILLUSTRATIONS
+======================================== */
+
+.timeline-illustration {
+  grid-row: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+}
+
+/* Odd events: illustration on right */
+
+.timeline-event:nth-child(odd) .timeline-illustration {
+  grid-column: 3;
+}
+
+/* Even events: illustration on left */
+
+.timeline-event:nth-child(even) .timeline-illustration {
+  grid-column: 1;
+}
+
+/* Transparent illustrations */
+
+.timeline-illustration img {
+  display: block;
+
+  width: 65px;
+  height: 65px;
+
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Small mobile screens */
+
+@media (max-width: 380px) {
+
+  .timeline-illustration img {
+    width: 45px;
+    height: 45px;
+  }
+
+}
+
+/* Larger screens */
+
+@media (min-width: 601px) {
+
+  .timeline-illustration img {
+    width: 75px;
+    height: 75px;
+  }
+
+}
+
+/* ========================================
+   SECTION 6 — WITH LOVE & BLESSINGS
+======================================== */
+
+.compliments-section {
+  padding: 0;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.compliments-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.compliments-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* MAPPED CONTENT AREA */
+
+.compliments-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+  padding: 12px 15px;
+  overflow: hidden;
+
+  text-align: center;
+  color: #49302c;
+}
+
+/* HEADING */
+
+.compliments-heading {
+  margin: 0;
+  color: #806531;
+  font-family:  "DM Sans", Georgia, serif;
+  font-size: 8px;
+  font-weight: normal;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+/* INTRO */
+
+.compliments-intro {
+  margin: -5px 0;
+  color: #49302c;
+  font-family: "DM Sans", Georgia, serif;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.4;
+  
+}
+
+/* NAMES */
+
+.compliments-names {
+  margin: 2px 0px 0;
+  color: #9c3039;
+  font-family: "Cormorant Garamond", cursive;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* MESSAGE */
+
+.compliments-message {
+  margin: 0;
+  color: #634834;
+  font-family: "DM sans", Georgia, serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* FAMILY SIGNATURE */
+
+.compliments-family {
+  margin: -2px 0 0;
+  color: #49302c;
+  font-family: "Cormorant Garamond", cursive;
+  font-size: 14px;
+  font-weight: bolder;
+  font-style: italic;
+}
+
+/* CINEMATIC REVEAL */
+.compliments-section .cinematic-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.compliments-section .cinematic-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .compliments-section .cinematic-item {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* ========================================
+   SECTION 7 — FAMILY WELCOME
+======================================== */
+/* 
+.family-welcome-section {
+  background-color: #f8f5ef;
+  background-image: url("assets/bg.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0;
+} */
+
+/* Artwork */
+
+.family-welcome-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.family-welcome-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Mapped content */
+
+.family-welcome-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 8px 12px;
+  gap: 7px;
+
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+
+  color: #49302c;
+}
+
+/* Remove default heading and paragraph spacing */
+
+.family-welcome-content h2,
+.family-welcome-content h3,
+.family-welcome-content p {
+  margin: 0;
+}
+
+/* Main heading */
+
+.family-welcome-heading {
+  color: #634834;
+  font-family: "Tangerine", cursive;
+  font-size: clamp(25px, 8vw, 38px);
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+/* Chaugule Family */
+
+.family-welcome-name {
+  color: #9c3039;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(16px, 1vw, 27px);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/* Welcome message */
+
+.family-welcome-description {
+  max-width: 100%;
+  color: #49302c;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* Contact heading */
+
+.family-contact-heading {
+margin-top: 5px !important;
+    color: #8a3430;
+    font-family: "Cormorant Garamond", cursive;
+    font-size: clamp(18px, 4vw, 32px);
+    font-weight: normal;
+    line-height: 1.2;
+    font-style: italic;
+}
+
+/* Contact list */
+
+.family-contact-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 7px;
+  margin: 3px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.family-contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  width: 100%;
+}
+
+.family-contact-name {
+  color: #634834;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.family-contact-number {
+  color: #49302c;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  line-height: 1.4;
+}
+
+.family-welcome-content a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Cinematic reveal */
+
+.family-welcome-section .cinematic-item {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(15px);
+
+  transition:
+    opacity 0.9s ease,
+    filter 0.9s ease,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.family-welcome-section .cinematic-item.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+.brothers-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, auto);
+  gap: 17px;
+  width: 90%;
+  margin: 8px 0 0;
+  padding: 0;
+  justify-items: center;
+  align-items: center;
+}
+
+.family-contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 2px;
+  text-align: center;
+}
+/* Smaller phones */
+
+@media (max-width: 380px) {
+  .family-welcome-content {
+    padding: 5px 8px;
+    gap: 5px;
+  }
+
+  .family-welcome-description {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .family-contact-list {
+    gap: 5px;
+  }
+
+  .family-contact-name {
+    font-size: 15px;
+  }
+
+  .family-contact-number {
+    font-size: 10px;
+  }
+}
+
+/* Short screens */
+
+@media (max-height: 700px) {
+  .family-welcome-content {
+    gap: 4px;
+    padding: 5px;
+  }
+
+  .family-welcome-description {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .family-contact-list {
+    gap: 4px;
+  }
+
+  .family-contact-name {
+    font-size: 14px;
+  }
+
+  .family-contact-number {
+    font-size: 10px;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .family-welcome-section .cinematic-item {
+    transition: none !important;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+/* ========================================
+   BACK TO TOP
+======================================== */
+
+.family-welcome-section {
+  position: relative;
+}
+
+.to-top {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  color: #241b19;
+  cursor: pointer;
+  z-index: 10;
+
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.to-top:hover {
+  opacity: 1;
+}
+.to-top {
+  display: none;
+}
+
+.family-welcome-section.section-active .to-top {
+  display: block;
+}
+#wedding-timeline-section {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #wedding-timeline-section {
+    scroll-behavior: auto;
+  }
+}

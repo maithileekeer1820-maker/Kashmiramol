@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html lang="en" class="preload">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f5ef">
+  <meta name="description" content="An invitation to celebrate a wedding.">
+  <title>A Wedding Invitation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+<!-- Prioritise door images -->
+<link rel="preload" as="image" href="assets/Left-Door.png" fetchpriority="high">
+<link rel="preload" as="image" href="assets/Right-Door.png" fetchpriority="high">
+<link rel="preload" as="image" href="assets/Wax-Seal.png" fetchpriority="high">
+
+  <link rel="preload" as="image" href="assets/u-r-invited.png">
+
+
+  <!-- CRITICAL FIRST-SCREEN STYLING -->
+<style>
+  html.preload,
+  html.preload body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #241b19;
+  }
+
+  html.preload .invitation > :not(.doorway):not(.seal-button) {
+    visibility: hidden !important;
+  }
+
+  html.preload .doorway {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: block;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  html.preload .door {
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  html.preload .door-left {
+    left: 0;
+  }
+
+  html.preload .door-right {
+    right: 0;
+  }
+
+  html.preload .seal-button {
+    position: fixed;
+    z-index: 10000;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 90px;
+    height: 90px;
+    padding: 0;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  html.preload .seal-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="invitation" id="invitation">
+
+    <!-- First screen: You are invited -->
+    <section class="welcome-section" id="welcome-section">
+      <div class="welcome-content">
+        <p class="welcome-top">You are</p>
+        <h1 class="welcome-script">invited</h1>
+        <p class="welcome-hashtag">#chaugulefamily</p>
+      </div>
+    </section>
+
+    <div class="content-sections" id="content-sections">
+    <!-- Second screen: Wedding invitation card -->
+    <section class="invite-section" id="invite-section">
+      <div class="invite-card">
+
+        <div class="card-text">
+
+          <img src="assets/Ganpati.png" class="ganesha">
+
+          <h2 class="invitation-heading zoom-in">
+            To the Wedding of
+          </h2>
+
+          <div class="fine-rule zoom-in" aria-hidden="true">
+            <span>❧</span>
+          </div>
+
+          <div class="person bride-name">
+            <h3>Kashmira</h3>
+            <p>Daughter of Shrikrushna Ramakant Chaugule</p>
+          </div>
+
+          <span class="ampersand zoom-in" aria-hidden="true">&amp;</span>
+
+          <div class="person groom-name">
+            <h3>Amol</h3>
+            <p>Son of Narayan Desai</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    
+<!-- SECTION 3 — SAVE THE DATE -->
+
+<section class="save-date-section" id="save-date-section">
+
+  <div class="save-date-art">
+
+    <img
+      src="assets/save-the-date.png"
+      class="save-date-image"
+      alt="Save the Date wedding invitation artwork"
+    >
+
+    <!-- Content stays inside image-map coordinates -->
+    <div class="save-date-content">
+
+  
+
+      
+<h2 class="save-date-title cinematic-item">
+  <span class="save-word">Save the</span>
+  <span class="date-word">date</span>
+</h2>
+
+
+      <p class="save-date-month cinematic-item">
+        April 2027
+      </p>
+
+      <!-- April 2027 calendar -->
+      <div class="save-date-calendar cinematic-item">
+
+        <div class="calendar-weekdays">
+          <span>Sun</span>
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
+        </div>
+
+        <div class="calendar-days">
+
+  <span class="calendar-day"></span>
+  <span class="calendar-day"></span>
+  <span class="calendar-day"></span>
+  <span class="calendar-day"></span>
+  <span class="calendar-day">1</span>
+  <span class="calendar-day">2</span>
+  <span class="calendar-day">3</span>
+
+  <span class="calendar-day">4</span>
+  <span class="calendar-day">5</span>
+  <span class="calendar-day">6</span>
+  <span class="calendar-day">7</span>
+  <span class="calendar-day">8</span>
+  <span class="calendar-day">9</span>
+  <span class="calendar-day">10</span>
+
+  <span class="calendar-day">11</span>
+  <span class="calendar-day">12</span>
+  <span class="calendar-day">13</span>
+  <span class="calendar-day">14</span>
+  <span class="calendar-day">15</span>
+  <span class="calendar-day">16</span>
+  <span class="calendar-day">17</span>
+
+  <span class="calendar-day date-highlight">
+    <img src="assets/heart.png" class="calendar-heart" alt="" aria-hidden="true">
+    <span class="calendar-date-number">18</span>
+  </span>
+  <span class="calendar-day">19</span>
+  <span class="calendar-day">20</span>
+  <span class="calendar-day">21</span>
+  <span class="calendar-day">22</span>
+  <span class="calendar-day">23</span>
+  <span class="calendar-day">24</span>
+
+  <span class="calendar-day">25</span>
+  <span class="calendar-day">26</span>
+  <span class="calendar-day">27</span>
+  <span class="calendar-day">28</span>
+  <span class="calendar-day">29</span>
+  <span class="calendar-day">30</span>
+
+</div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 4 — WEDDING VENUE & TIME -->
+
+<section class="wedding-time-section" id="wedding-time-section">
+
+  <div class="wedding-time-art">
+
+    <img
+      src="assets/venue-time.png"
+      class="wedding-time-image"
+      alt="Wedding invitation artwork"
+    >
+
+    <!-- VENUE — POLYGON AREA -->
+    <div class="wedding-venue-content">
+<span class="wedding-venue-content-title cinematic-item">Venue</span>
+      <p class="wedding-venue-text cinematic-item">
+  <span>Mangal Karyalay,</span>
+
+  Khanu Math, Lanja Road, Ratnagiri
+</p>
+
+    </div>
+
+    <!-- TIME — RECTANGLE AREA -->
+    <div class="wedding-time-content">
+
+      <span class="wedding-time-content-title cinematic-item">VIVAH MUHURTA</span>
+
+      <p class="wedding-time-text cinematic-item">
+        12:30 PM
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SECTION 5 — WEDDING TIMELINE -->
+
+<section class="wedding-timeline-section" id="wedding-timeline-section">
+
+  <div class="timeline-frame">
+    <div class="timeline-inner">
+
+      <header class="timeline-header cinematic-item">
+        <h2 class="timeline-main-title">Wedding</h2>
+        <p class="timeline-script-title">Timeline</p>
+        <div class="timeline-divider">✦</div>
+      </header>
+
+      <div class="wedding-timeline">
+
+        <div class="timeline-event cinematic-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-event-content">
+            <h3>Engagement</h3>
+            <p class="timeline-date">15th April</p>
+            <p class="timeline-time">4:00 PM</p>
+            <p class="timeline-venue">Chaugule House, Pali</p>
+          </div>
+          <div class="timeline-illustration">
+  <img src="assets/engagement.png" alt="">
+</div>
+        </div>
+
+        <div class="timeline-event cinematic-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-event-content">
+            <h3>Sangeet</h3>
+            <p class="timeline-date">15th April</p>
+            <p class="timeline-time">7:00 PM</p>
+            <p class="timeline-venue">Chaugule House, Pali</p>
+          </div>
+          <!-- SANGEET -->
+<div class="timeline-illustration">
+  <img src="assets/sangeet.png" alt="">
+</div>
+        </div>
+
+        <div class="timeline-event cinematic-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-event-content">
+            <h3>Haldi</h3>
+            <p class="timeline-date">16th April</p>
+            <p class="timeline-time">6:00 PM</p>
+            <p class="timeline-venue">Chaugule House, Pali</p>
+          </div>
+          <div class="timeline-illustration">
+  <img src="assets/haldi.png" alt="">
+</div>
+        </div>
+
+        <div class="timeline-event cinematic-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-event-content">
+            <h3>Wedding</h3>
+            <p class="timeline-date">18th April</p>
+            <p class="timeline-time">12:30 PM</p>
+            <p class="timeline-venue">Mangal Karyalay, Khanu Math</p>
+          </div>
+          <div class="timeline-illustration">
+  <img src="assets/wedding.png" alt="">
+</div>
+        </div>
+
+        <div class="timeline-event cinematic-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-event-content">
+            <h3>Reception</h3>
+            <p class="timeline-date">18th April</p>
+            <p class="timeline-time">3:00 PM</p>
+            <p class="timeline-venue">Mangal Karyalay, Khanu Math</p>
+          </div>
+          <div class="timeline-illustration">
+  <img src="assets/reception.png" alt="">
+</div>
+        </div>
+
+      </div>
+
+      <div class="timeline-footer cinematic-item">✦</div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- SECTION 6 — WITH LOVE & BLESSINGS -->
+
+<section class="compliments-section" id="compliments-section">
+
+  <div class="compliments-art">
+
+    <img
+      src="assets/best-compliments.png"
+      class="compliments-image"
+      alt="With love and blessings from the Chaugule family"
+    >
+
+    <div class="compliments-content">
+
+      <h2 class="compliments-heading cinematic-item">
+        With Love & Blessings
+      </h2>
+
+      <p class="compliments-intro cinematic-item">
+We invite you to celebrate the wedding of our beloved 
+      </p>
+
+      <h3 class="compliments-names cinematic-item">
+        Kashmira & Amol
+      </h3>
+
+      <!-- <p class="compliments-family cinematic-item">
+        Chaugule Family
+      </p> -->
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<section id="family-welcome-section" class="family-welcome-section">
+
+  <div class="family-welcome-art">
+
+    <img
+      src="assets/last.png"
+      alt="Chaugule Family Welcome"
+      class="family-welcome-image"
+    >
+
+    <div class="family-welcome-content">
+
+      <div class="cinematic-item">
+        <h2 class="family-welcome-heading">
+          Best Compliments From,
+        </h2>
+
+        <h3 class="family-welcome-name">
+          The Chaugule Family
+        </h3>
+      </div>
+
+     
+
+      <p class="family-welcome-description cinematic-item">
+        Your presence will make our celebration
+        even more memorable. We look forward to welcoming you.
+      </p>
+ <div class="fine-rule cinematic-item">✦</div>
+      <div class="cinematic-item">
+        <h3 class="family-contact-heading">
+          A Warm Welcome From
+        </h3>
+      </div>
+
+      
+
+      <div class="brothers-list">
+
+        <div class="family-contact-item cinematic-item">
+          <span class="family-contact-name">Chinmay Chaugule</span>
+          <a class="family-contact-number" href="tel:+910000000001">
+            +91 00000 00001
+          </a>
+        </div>
+
+        <div class="family-contact-item cinematic-item">
+          <span class="family-contact-name">Akshay Pawar</span>
+          <a class="family-contact-number" href="tel:+910000000002">
+            +91 00000 00002
+          </a>
+        </div>
+
+        <div class="family-contact-item cinematic-item">
+          <span class="family-contact-name">Parth Chaugule</span>
+          <a class="family-contact-number" href="tel:+910000000003">
+            +91 00000 00003
+          </a>
+        </div>
+
+        <div class="family-contact-item cinematic-item">
+          <span class="family-contact-name">Sarthak Sawant</span>
+          <a class="family-contact-number" href="tel:+910000000004">
+            +91 00000 00004
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+<div class="to-top">Back to top</div>
+</section>
+
+
+</div>
+    <!-- Doors stay over the opening screen -->
+    <div class="doorway" aria-hidden="true">
+      <img class="door door-left" src="assets/Left-Door.png" alt="">
+      <img class="door door-right" src="assets/Right-Door.png" alt="">
+    </div>
+
+    <!-- Wax seal button -->
+    <button
+      class="seal-button"
+      id="open-invitation"
+      type="button"
+      aria-label="Open the wedding invitation"
+    >
+      <img src="assets/Wax-Seal.png" alt="">
+    </button>
+
+    <!-- NEXT SECTION ARROW -->
+<button
+  class="next-section-button"
+  id="next-section-button"
+  type="button"
+  aria-label="Go to next section"
+>
+  <img src="assets/next-arrow.gif" alt="">
+</button>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
